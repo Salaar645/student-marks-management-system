@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+    margin:0px;
+    font-family: arial;
+    border: border-box;
+}
+.navbar{
+    width:100%;
+    height:70px;
+    background-color:black;
+    color:white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav-logo{
+    padding:2px;
+    height:60px;
+    width:60px;
+}
+.logo{
+    background-image:url("{{url_for('static',filename='images/book1.jpg')}}");
+    background-size: cover;
+    height:60px;
+    width:60px;
+}
+.nav-address {
+    width:100px;
+   height:50px;
+    
+}
+.nav-search{
+    
+    width:500px;
+    height:50px;
+    align-content: center;
+    
+}
+.nav-search1{
+    
+    height:35px;
+    display:flex;
+    margin-top:0.5rem;
+} 
+input{
+    width:450px;
+    height:30px;
+}
+.mainbox{
+    width:700px;
+    display:flex;
+    justify-content: space-evenly;
+    
+   text-decoration:none;
+
+}
+.color{
+    color:white;
+}
+.box4{
+    color:white;
+    text-decoration: none;
+}
+.second-logo{
+    width: 100%;
+    height:150px;
+    background-color:white;
+    display:flex;
+    align-content: center;
+   
+}
+.hafe-logo{
+    width:60%;
+    height:130px;
+    background-color: white;
+    background-image: url("{{url_for('static',filename='images/logohed.jpg')}}");
+    background-size:cover;
+    
+    
+
+   
+}
+.full-logo{
+    width:40%;
+    height:130px;
+    background-color: white;
+    background-image: url("{{url_for('static',filename='images/logo_mrcet.jpg')}}");
+    background-size:cover;
+}
+.border{
+    border:2px solid transparent;
+}
+.border:hover{
+    border:1.5px solid white; 
+}
+
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #bcb8b8; background-image:url("{{url_for('static',filename='images/logomrcet.jpg')}}");background-size: contain;}
+        .container { width: 100%; max-width: 400px; margin: 0 auto; margin-top:50px; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.9); }
+        h1 { text-align: center; color: #333; }
+        label { font-size: 14px; margin-bottom: 5px; display: block; }
+        input { width: 95%; padding: 10px; margin-bottom: 15px; border: 1px solid #000000; border-radius: 4px; }
+        button { width: 100%; padding: 10px;  background: linear-gradient(135deg, #1e5ea2 0%, #0b0d0f 100%);; border: none; color: white; font-size: 16px; border-radius: 4px; cursor: pointer; }
+        button:hover {
+            background: linear-gradient(135deg, #0056b3 0%, #0a0b0e 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
+        p { text-align: center; font-size: 14px; }
+        a { color: #ff0606; text-decoration: none; }
+
+
+
+
+.footer{
+    width: 100%;
+    height: 320px;
+    background-color:#222f3d;
+    
+}
+.inner{
+    width: 90%;
+    height:320px;
+    margin: 5%;
+    background-color:#222f3d;
+    align-content: center;
+    display:flex;
+}
+ul a{
+    width: max-content;
+    
+    display:block;
+    color:#8EB6D6;
+    font-size: 12px;
+    margin:15px;
+    text-decoration: none;
+}
+ul{
+    height: max-content;
+
+    margin: 20px;
+    color: white;
+}
+.body{
+    width: 70%;
+    height: 310px;
+    background-color: #222f3d;
+    display:flex;
+    justify-content: space-evenly;
+}
+.body1{
+    width: 50%;
+    height:50px;
+    background-image: url("url_for('static',filename='images/footr_logo.jpg')}}");
+    background-size:auto;
+    align-content: center;
+    margin-top:90px;
+    margin-left: 50px;
+}
+.bodys{
+    width: 30%;
+    color:#8EB6D6;
+    display: block;
+}
+.body2{
+   margin-top: 10px;
+    color:#8EB6D6;
+    display: block;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+           <div class="nav-logo border">
+                 <div class="logo"> </div>
+    
+            </div>
+            <div class="nav-address border">
+            </div>
+            
+                <div class="nav-search border"> 
+                    <div class="nav-search1">  
+                        <p>mrcet2004@gmail.com</p>
+                    </div>
+               </div >
+                <div class="mainbox" >
+                    <div class="box4 border">
+                       <a  href="http://127.0.0.1:5500/templates/login.html" style="text-decoration:none;" ><h1 style="color:white" >Home</h1></a>
+                    </div>
+                    <div class="box5 border">
+                       <a href="http://127.0.0.1:5000/marks" style="text-decoration:none;" ><h1 style="color:white">Student marks</h1></a>
+                    </div>
+                    <div class="box5 border">
+                     <a href="#"  style="text-decoration:none;"><h1 style="color:white">About Us</h1></a>
+                    </div>
+                </div>
+        </div>
+        <div class="second-logo">
+                  <div class="hafe-logo"></div>
+                  <div class="full-logo"></div>
+        </div>
+    
+    </header>
+    <div class="container">
+        <h1>Teacher Registration</h1>
+        <form action="http://127.0.0.1:5000/register" method="POST">
+    
+            <label for="username">Email-ID:</label>
+            <input type="email" name="username" required><br><br>
+    
+            <label for="password">Password:</label>
+            <input type="password" name="password" required><br><br>
+    
+            <button type="submit">Register</button>
+        </form>
+    
+        <p>Already have an account? <a href="http://127.0.0.1:5000/">Login here</a></p>
+    </div>
+
+
+
+    <footer>
+        <div class="footer">
+            <div class="inner">
+                <div class="body">
+                    <ul><h3>Quiq link</h3>
+                     <a href="https://mrcet.com/index.html"  >Home</a>
+                <a href="https://mrcet.com/Principal.html"  >principal</a>
+                <a href="https://mrcet.com/internationalconference.html"  >international conference</a>
+                <a href="https://mrcet.com/alumni.html"  >MRCET ERP</a>
+                <a href="https://mrcet.com/PlacementsOffice.html">placement office</a> 
+                <a href="https://mrcet.com/PlacementsOffice.html" >placement office</a></ul> 
+    
+                <ul ><h3>How To Find Us</h3>
+                <a href="https://mrcet.com/index.html" > Maisammaguda, Dhulapally,</a>
+                <a href="https://mrcet.com/Principal.html"  >Kompally, Medchal,</a>
+                <a href="https://mrcet.com/internationalconference.html"  >7207034237, 23792146,</a>
+                <a href="https://mrcet.com/alumni.html"  >mrcet2004@gmail.com</a>
+                <a href="https://mrcet.com/PlacementsOffice.html" > mrcetoffice2004@gmail.com</a> 
+                <a href="https://mrcet.com/PlacementsOffice.html"  > adminoffice@mrcet.ac.in</a></ul> 
+                <ul ><h3>How To Reach Us</h3>
+                    <br>
+                    <a href="https://www.google.com/maps/place/MALLA+REDDY+COLLEGE+OF+ENGINEERING+AND+TECHNOLOGY+(MRCET)/@17.561444,78.455162,3576m/data=!3m1!1e3!4m6!3m5!1s0x3bcb8f678c846119:0xb5ddf0d51b174557!8m2!3d17.5622181!4d78.4553765!16s%2Fg%2F11bc57p5sy?hl=en-US&entry=ttu&g_ep=EgoyMDI1MDMxMS4wIKXMDSoASAFQAw%3D%3D"><img src="map.jpg">
+                     </a>
+                    </ul> 
+                </div>
+                <div class="bodys">
+                <div class="body1">
+                   
+                </div>
+                <u>   _____________________________</u>
+                <div class="body2">
+                    <p>© 2017 MRCET. All rights reserved</p>
+                    <br>
+                       <a> TERMS OF USEPRIVACY POLICYSITEMAP</a>
+                    
+                </div>
+            </div>
+            </div>
+        </div>
+     </footer>
+</body>
+</html>

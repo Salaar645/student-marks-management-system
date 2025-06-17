@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks Entry</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            background-image: url("{{url_for('static',filename='images/99.jpg')}}");
+        }
+        .invalid {
+            background-color: #b91111; /* Light red background */
+            border: 1px solid #ff0000; /* Red border */
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 1200px;
+            width: 90%; /* Make the container responsive */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Add horizontal scroll if content overflows */
+        }
+        h2 {
+            color: #1e3c72;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #e1e5ea;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background: #1e3c72;
+            color: white;
+            font-weight: 500;
+        }
+        td input {
+            width: 80px;
+            padding: 5px;
+            text-align: center;
+            border-radius: 4px;
+            border: 1px solid #e1e5ea;
+        }
+        button {
+            display: inline-block;
+            margin: 10px 5px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(42, 82, 152, 0.2);
+        }
+        #resultTable {
+            margin-top: 30px;
+            width: 100%;
+        }
+        #resultTable th {
+            background: #2a5298;
+        }
+        .result-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .result-title {
+            color: #1e3c72;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 id="tableTitle"></h2>
+        <table id="marksTable">
+            <tr id="headerRow">
+                <th>S.No</th>
+                <th>Roll No</th>
+            </tr>
+        </table>
+        <br>
+        <div style="text-align:center;">
+            <button onclick="addStudentRow()">Add Student</button>
+            <button onclick="addSubjectColumn()">Add Subject</button>
+            <button onclick="submitData()">Submit</button>
+            <button onclick="redirectToPreview()">Preview</button>
+        </div>
+        
+        <div id="resultContainer" class="result-container" style="display: none;">
+            <h3 class="result-title">Range-wise Student Count per Subject</h3>
+            <table id="resultTable">
+                <!-- Result table will be generated here -->
+            </table>
+        </div>
+    </div>
+    <script src="{{url_for('static',filename='js/pro1.js')}}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const subjects = JSON.parse(localStorage.getItem("subjects")) || [];
+            const rollNumbers = JSON.parse(localStorage.getItem("rollNumbers")) || [];
+            const year = localStorage.getItem("year");
+            const branch = localStorage.getItem("branch");
+            const section = localStorage.getItem("section");
+            const semester = localStorage.getItem("semester");
+
+            // Set the table name
+            const tableName = `${year} ${branch} Section ${section} SEM${semester}`;
+            document.getElementById("tableTitle").innerText = tableName;
+
+            const headerRow = document.getElementById("headerRow");
+            const table = document.getElementById("marksTable");
+
+            subjects.forEach(subject => {
+                headerRow.innerHTML += `<th>${subject} M1</th><th>${subject} M2</th><th>${subject} Avg</th>`;
+            });
+
+            rollNumbers.forEach((rollNo, index) => {
+                let newRow = table.insertRow(-1);
+                let cols = `<td><input type='text' value='${index + 1}' readonly></td>`;
+                cols += `<td><input type='text' value='${rollNo}' readonly></td>`;
+                subjects.forEach(() => {
+                    cols += "<td><input type='number' min='0' oninput='validateMarks(this); calculateAverages(this.parentNode.parentNode)'></td>";
+                    cols += "<td><input type='number' min='0' oninput='validateMarks(this); calculateAverages(this.parentNode.parentNode)'></td>";
+                    cols += "<td>-</td>";
+                });
+                newRow.innerHTML = cols;
+            });
+        });
+        function redirectToPreview() {
+        let table = document.getElementById("marksTable");
+        let rowCount = table.rows.length;
+        let studentData = [];
+        const subjects = JSON.parse(localStorage.getItem("subjects")) || [];
+        let subjectRangeCounts = {};
+
+        // Initialize range counts for each subject
+        subjects.forEach((subject) => {
+            subjectRangeCounts[subject] = { 
+                "35-40": 0, 
+                "25-34": 0, 
+                "14-24": 0,
+                "0-13": 0
+            };
+        });
+
+        for (let i = 1; i < rowCount; i++) {
+            let row = table.rows[i];
+            let sno = row.cells[0].children[0].value.trim();
+            let rollNo = row.cells[1].children[0].value.trim();
+            if (!rollNo) continue;
+
+            let rowData = { "S.No": sno, "Roll No": rollNo };
+            for (let j = 2; j < row.cells.length; j += 3) {
+                let subjectIndex = (j - 2) / 3;
+                let subjectName = subjects[subjectIndex];
+                let m1 = row.cells[j].children[0]?.value || "0";
+                let m2 = row.cells[j + 1].children[0]?.value || "0";
+                let avg = parseFloat(row.cells[j + 2].innerText) || 0;
+                rowData[`${subjectName} M1`] = m1;
+                rowData[`${subjectName} M2`] = m2;
+                rowData[`${subjectName} Avg`] = avg.toFixed(2);
+
+                // Count students in each range
+                if (avg >= 35 && avg <= 40) {
+                    subjectRangeCounts[subjectName]["35-40"]++;
+                } else if (avg >= 25 && avg <= 34) {
+                    subjectRangeCounts[subjectName]["25-34"]++;
+                } else if (avg >= 14 && avg <= 24) {
+                    subjectRangeCounts[subjectName]["14-24"]++;
+                } else {
+                    subjectRangeCounts[subjectName]["0-13"]++;
+                }
+            }
+            studentData.push(rowData);
+        }
+
+        localStorage.setItem("marksData", JSON.stringify(studentData));
+        localStorage.setItem("rangeCounts", JSON.stringify(subjectRangeCounts));
+
+        // Redirect to preview page
+        window.location.href = "/preview1";
+    }
+    </script>
+</body>
+</html>

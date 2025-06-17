@@ -1,0 +1,72 @@
+
+body {
+	font-family: Arial, sans-serif;
+	background:linear-gradient(134deg,red 25%,blue 77%);
+}
+
+.container {
+	width: 80%;
+    height: 30%;
+	margin: 40px auto;
+	background:linear-gradient(134deg,rgb(49, 244, 244) 28%,black 77%);
+	padding: 20px;
+	border: 1px solid #ddd;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2{
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+label {
+	display: block;
+	margin-bottom: 10px;
+}
+
+select, input[type="number"] {
+	width: 97%;
+	height: 40px;
+	margin-bottom: 18px;
+	padding: 10px;
+	border: 1px solid #ccc;
+}
+
+button {
+	background-color: #4CAF50;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+button:hover {
+	background:linear-gradient(134deg,rgb(186, 11, 240) 50%,blue 77%);
+
+}
+
+input[type="submit"] {
+	background-color: #4CAF50;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+input[type="submit"]:hover {
+	background:linear-gradient(134deg,rgb(186, 11, 240) 50%,blue 77%);
+}
+
+#display-data {
+	margin-top: 40px;
+	padding: 20px;
+	background-color: #f9f9f9;
+	border: 1px solid #ddd;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
